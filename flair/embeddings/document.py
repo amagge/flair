@@ -62,6 +62,7 @@ class TransformerDocumentEmbeddings(DocumentEmbeddings):
         self.model = AutoModel.from_pretrained(model, config=config)
 
         self.max_len = min ([self.tokenizer.model_max_length, max_len])
+        log.info("Max length: %s", self.max_len)
 
         # model name
         self.name = 'transformer-document-' + str(model)
@@ -110,8 +111,6 @@ class TransformerDocumentEmbeddings(DocumentEmbeddings):
 
             # first, subtokenize each sentence and find out into how many subtokens each token was divided
             subtokenized_sentences = []
-
-            log.info("Max length: %s", self.max_len)
 
             # subtokenize sentences
             for sentence in sentences:
